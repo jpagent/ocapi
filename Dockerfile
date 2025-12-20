@@ -17,10 +17,10 @@ WORKDIR /workspace
 # Copy web source and build static files
 COPY web/ /tmp/web/
 WORKDIR /tmp/web
-RUN npm ci --only=production && npm run build
+RUN npm ci && npm run build
 
 # Copy built static files to nginx
-RUN mkdir -p /var/www/html && cp -r out/* /var/www/html/ 2>/dev/null || cp -r .next/static /var/www/html/ 2>/dev/null || echo "Static build not available, will serve API only"
+RUN mkdir -p /var/www/html && cp -r out/* /var/www/html/
 
 WORKDIR /workspace
 

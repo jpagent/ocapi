@@ -112,7 +112,7 @@ export function createOpencodeClient(options: { baseUrl: string }): OpencodeClie
           return [];
         }
       } catch (error) {
-        console.warn('Failed to fetch messages:', error.message);
+        console.warn('Failed to fetch messages:', error instanceof Error ? error.message : String(error));
         return [];
       }
     },
