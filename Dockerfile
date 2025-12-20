@@ -3,6 +3,9 @@ FROM alpine:3.20
 # Install runtime dependencies including C++ libraries needed for opencode
 RUN apk add --no-cache git ca-certificates curl bash libstdc++ libgcc nodejs npm
 
+# Install http-proxy for Node.js server
+RUN npm install -g http-proxy
+
 # Install opencode via official install script
 RUN curl -fsSL https://opencode.ai/install | bash
 
@@ -14,13 +17,8 @@ RUN mkdir -p /workspace
 
 WORKDIR /workspace
 
-# Copy web source and build static files
-COPY web/ /tmp/web/
-WORKDIR /tmp/web
-RUN npm ci && npm run build
-
-# Copy built static files
-RUN mkdir -p /app/static && cp -r out/* /app/static/
+# Copy pre-built static files
+COPY web/out/ /app/static/
 
 # Install http-proxy for Node.js server
 RUN npm install -g http-proxy
