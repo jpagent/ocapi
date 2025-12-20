@@ -3,8 +3,8 @@ FROM alpine:3.20
 # Install runtime dependencies including C++ libraries needed for opencode
 RUN apk add --no-cache git ca-certificates curl bash libstdc++ libgcc nodejs npm
 
-# Install http-proxy for Node.js server
-RUN npm install -g http-proxy
+# Create app directory and install http-proxy
+RUN mkdir -p /app && cd /app && npm init -y && npm install http-proxy
 
 # Install opencode via official install script
 RUN curl -fsSL https://opencode.ai/install | bash
