@@ -214,50 +214,6 @@ For IDE-style integration, configure ACP:
 
 **Recommendation**: Use `opencode serve` for web applications.
 
-## Phase 6: Security Considerations
-
-### 6.1 Production Deployment
-
-```bash
-# Bind to localhost only for security
-docker run -d \
-  -p 127.0.0.1:4096:4096 \
-  opencode-api
-```
-
-### 6.2 Security Checklist
-
-- [ ] Never expose `opencode serve` directly to the internet without authentication
-- [ ] Use HTTPS in production (via reverse proxy)
-- [ ] Implement rate limiting
-- [ ] Audit file access permissions in mounted volumes
-
-## Phase 7: Implementation Checklist
-
-### MVP
-
-- [ ] Dockerfile with opencode and Grok model
-- [ ] Docker Compose for easy deployment
-- [ ] API accessible via curl
-- [ ] Session creation and message sending
-- [ ] SSE event streaming
-
-### V1.0
-
-- [ ] Web frontend with SDK
-- [ ] Session management UI
-- [ ] File explorer
-- [ ] Cost tracking
-
-### V2.0
-
-- [ ] Multi-model support
-- [ ] Authentication layer
-- [ ] Rate limiting
-- [ ] Kubernetes deployment
-
----
-
 ## Final Validation Test
 
 The following test validates the complete setup by running the Docker container and sending a prompt to solve FizzBuzz in Elixir.
