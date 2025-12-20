@@ -68,12 +68,7 @@ RUN echo 'server {\
 }' > /etc/nginx/http.d/default.conf
 
 # Create startup script
-RUN echo '#!/bin/bash\
-echo "Starting OpenCode API server on port 4097..."\
-opencode serve --hostname 127.0.0.1 --port 4097 &\
-\
-echo "Starting nginx on port 4096..."\
-nginx -g "daemon off;"' > /start.sh && chmod +x /start.sh
+RUN printf '#!/bin/bash\necho "Starting OpenCode API server on port 4097..."\nopencode serve --hostname 127.0.0.1 --port 4097 &\necho "Starting nginx on port 4096..."\nnginx -g "daemon off;"\n' > /start.sh && chmod +x /start.sh
 
 # Expose the combined port
 EXPOSE 4096
