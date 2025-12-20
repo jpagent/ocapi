@@ -1,15 +1,13 @@
-FROM golang:1.23-alpine AS builder
-
-# Install opencode
-RUN go install github.com/sst/opencode@latest
-
 FROM alpine:3.20
 
 # Install runtime dependencies
-RUN apk add --no-cache git ca-certificates
+RUN apk add --no-cache git ca-certificates curl bash
 
-# Copy opencode binary
-COPY --from=builder /go/bin/opencode /usr/local/bin/opencode
+# Install opencode via official install script
+RUN curl -fsSL https://opencode.ai/install | bash
+
+# Add opencode to PATH
+ENV PATH="/root/.opencode/bin:$PATH"
 
 # Create workspace directory
 RUN mkdir -p /workspace
