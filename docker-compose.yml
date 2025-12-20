@@ -1,0 +1,13 @@
+# docker-compose.yml
+version: "3.8"
+
+services:
+  opencode:
+    build: .
+    ports:
+      - "4096:4096"
+    environment:
+      - OPENCODE_MODEL=x-ai/grok-3-fast
+    volumes:
+      - ./workspace:/workspace
+    restart: unless-stopped
