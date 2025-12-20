@@ -1,7 +1,7 @@
 FROM alpine:3.20
 
-# Install runtime dependencies
-RUN apk add --no-cache git ca-certificates curl bash
+# Install runtime dependencies including C++ libraries needed for opencode
+RUN apk add --no-cache git ca-certificates curl bash libstdc++ libgcc
 
 # Install opencode via official install script
 RUN curl -fsSL https://opencode.ai/install | bash
